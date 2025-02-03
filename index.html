@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Valentine Proposal</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: url('background.jpg') center/cover no-repeat;
+        }
+        .wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background-color: rgba(255, 182, 193, 0.8);
+            text-align: center;
+            padding: 5vw;
+            box-sizing: border-box;
+            position: relative;
+        }
+        .sticker {
+            position: absolute;
+            width: 15vw; 
+            max-width: 120px;
+        }
+        .sticker-top-left { top: 5vw; left: 5vw; }
+        .sticker-top-right { top: 5vw; right: 5vw; }
+        .sticker-bottom-left { bottom: 5vw; left: 5vw; }
+        .sticker-bottom-right { bottom: 5vw; right: 5vw; }
+        h1 {
+            font-size: 6vw;
+            color: #ff69b4;
+            max-width: 90%;
+        }
+        .button {
+            margin-top: 5vw;
+            padding: 3vw 6vw;
+            font-size: 4vw;
+            color: white;
+            background-color: #ff69b4;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s;
+        }
+        .button:hover { background-color: #ff1493; }
+        #gallery-image {
+            width: 80vw;
+            max-width: 500px;
+            border-radius: 10px;
+        }
+        .gallery-caption {
+            font-size: 4vw;
+            margin-top: 2vw;
+            color: #333;
+        }
+        #popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 400px; /* Increase padding for a larger popup */
+            width: 80%; /* Increase width */
+            max-width: 400px; /* Set a max width */
+            border-radius: 15px; /* Slightly larger border radius for aesthetics */
+            text-align: center;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Slightly stronger shadow */
+}
+
+        #popup img {
+            width: 700px; /* Increase image size */
+            height: 700px;
+            margin-bottom: 20px;
+        }
+
+        #popup p {
+            font-size: 4rem; /* Increase text size */
+        }
+
+    </style>
+</head>
+<body>
+    <audio autoplay loop src="music1.mp3"></audio>  
+    <audio id="bg-music" loop>
+        <source src="music1.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="wrapper" id="page1">
+        <img src="sticker1.jpg" class="sticker sticker-top-left">
+        <img src="sticker2.jpg" class="sticker sticker-top-right">
+        <img src="sticker3.jpg" class="sticker sticker-bottom-left">
+        <img src="sticker4.jpg" class="sticker sticker-bottom-right">
+        <h1>Kyra my exquisite, gorgeous, beautiful, lovely, ravishing, magnificent, stunning, pulchritudinous QUEEN</h1>
+        <button class="button" onclick="nextPage(2)">Next</button>
+    </div>
+
+    <div class="wrapper" id="page2" style="display: none;">
+        <div id="gallery-container">
+            <img id="gallery-image" src="photo1.jpg" alt="Gallery Image">
+            <p class="gallery-caption" id="gallery-caption">Even if you were cloned, you'd still be the better-looking one.</p>
+        </div>
+        <button class="button" id="next-button" style="display: none;" onclick="nextPage(3)">Next</button>
+    </div>
+
+     <div class="wrapper" id="page3" style="display: none;">
+        <img src="sticker5.jpg" class="sticker sticker-top-left">
+        <img src="sticker6.jpg" class="sticker sticker-top-right">
+        <img src="sticker7.jpg" class="sticker sticker-bottom-left">
+        <img src="sticker8.jpg" class="sticker sticker-bottom-right">
+        <h1>My pookie, no words can describe the consistent joy I have to be your boyfriend and to be able to talk to you every morning.<br>You are my sunshine, my safe place,<br>Before you came into my life, Life was so heavy, <br>But since you came along, I'm light as a feather. You give me something incredible.<br>I love you and I am glad that I can ask you THE question 😂</h1>
+        <button class="button" onclick="nextPage(4)">Next</button>
+    </div>
+
+    <div class="wrapper" id="page4" style="display: none;">
+        <h1>Do you want to be my Valentine?</h1>
+        <button class="button" onclick="showPopup()">Yes</button>
+        <button class="button" onclick="showPopup()">Yes</button>
+    </div>
+
+    <div id="popup">
+        <img src="yes.jpg" alt="Valentine Popup">
+        <p>Let's go and have a great Valentine's together!</p>
+        <button class="button" onclick="hidePopup()">Close</button>
+    </div>
+
+    <script>
+        const audio = document.getElementById('bg-music');
+        let currentGalleryIndex = 0;
+        const galleryImages = [
+            { src: 'photo1.jpg', caption: "Even if you were cloned, you'd still be the better-looking one." },
+            { src: 'photo2.jpg', caption: "I'll forever be here for you no matter what" },
+            { src: 'photo3.jpg', caption: "Keep that beautiful smile" },
+            { src: 'photo4.jpg', caption: "You have the most beautiful feet 😘" },
+            { src: 'photo5.jpg', caption: "You are smart" },
+            { src: 'photo6.jpg', caption: "You are Stunning" }, 
+            { src: 'photo7.jpg', caption: "You make my heart beat all the time" },
+            { src: 'photo8.jpg', caption: "Always Gorgeous no matter what" },
+            { src: 'photo9.jpg', caption: "Stronger than what you think" },
+            { src: 'photo10.jpg', caption: "I love you wifey" }
+        ];
+
+        function nextPage(pageNumber) {
+            document.querySelectorAll('.wrapper').forEach((wrapper, index) => {
+                wrapper.style.display = index + 1 === pageNumber ? 'flex' : 'none';
+            });
+
+            if (pageNumber === 2) {
+                audio.play();
+                startGallery();
+            } else if (pageNumber === 3) {
+                audio.src = "music2.mp3";
+                audio.play();
+            }
+        }
+
+        function startGallery() {
+            const galleryImage = document.getElementById('gallery-image');
+            const galleryCaption = document.getElementById('gallery-caption');
+            const nextButton = document.getElementById('next-button');
+            function showNextImage() {
+                if (currentGalleryIndex < galleryImages.length) {
+                    galleryImage.src = galleryImages[currentGalleryIndex].src;
+                    galleryCaption.textContent = galleryImages[currentGalleryIndex].caption;
+                    currentGalleryIndex++;
+                    setTimeout(showNextImage, 5000);
+                } else {
+                    nextButton.style.display = 'block';
+                }
+            }
+            showNextImage();
+        }
+
+        function showPopup() {
+            document.getElementById("popup").style.display = "block";
+        }
+
+        function hidePopup() {
+            document.getElementById("popup").style.display = "none";
+        }
+
+        audio.play();
+    </script>
+</body>
+</html>
